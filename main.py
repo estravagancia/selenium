@@ -1,11 +1,11 @@
+import pandas as pd
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import pandas as pd
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-
+from selenium.webdriver.common.action_chains import ActionChains
 espera_corta = 1
 espera_larga = 3
 timeout=10
@@ -25,10 +25,7 @@ for row, datos in df.iterrows():
 
     # Open URL
     driver.get(f"https://{sitio}/wp-login.php")
-
-    # Click the link which opens in a new window : NOT WORKING on my PC Windows 10
-    driver.find_element(By.TAG_NAME,'body').send_keys(Keys.CONTROL+'t')
-
+    
     time.sleep(espera_corta)
 
     user_browser = driver.find_element(By.XPATH,'//*[@id="user_login"]')
@@ -98,4 +95,12 @@ for row, datos in df.iterrows():
     except:
         print(f"En {sitio} no hay actualizaciones de temas disponibles")
 
-driver.close()
+
+
+time.sleep(espera_corta)
+
+ActionChains(driver)\
+    .key_down(Keys.CONTROL)\
+    .send_keys('w')\
+    .perform()
+# driver.close()
