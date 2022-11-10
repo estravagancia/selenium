@@ -1,14 +1,13 @@
+import pandas as pd
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import pandas as pd
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-
 espera_corta = 1
 espera_larga = 3
-timeout=10
+timeout = 10
 
 driver = webdriver.Firefox()
 # driver = webdriver.Chrome(executable_path='driver\chromedriver.exe')
@@ -17,6 +16,8 @@ driver = webdriver.Firefox()
 # chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 
 df = pd.read_csv('user.csv', '\t' )
+num_elementos = len(df.index)
+contador = 1
 
 for row, datos in df.iterrows():
     sitio = datos["sitio"]
@@ -25,10 +26,7 @@ for row, datos in df.iterrows():
 
     # Open URL
     driver.get(f"https://{sitio}/wp-login.php")
-
-    # Click the link which opens in a new window : NOT WORKING on my PC Windows 10
-    driver.find_element(By.TAG_NAME,'body').send_keys(Keys.CONTROL+'t')
-
+    
     time.sleep(espera_corta)
 
     user_browser = driver.find_element(By.XPATH,'//*[@id="user_login"]')
@@ -98,4 +96,15 @@ for row, datos in df.iterrows():
     except:
         print(f"En {sitio} no hay actualizaciones de temas disponibles")
 
-driver.close()
+    finally:
+        if contador != num_elementos:
+            driver.switch_to.new_window('sitio')
+        print("hasta aquí hemos llegado")
+        print(contador)
+
+    contador += 1
+
+time.sleep(espera_corta)
+
+
+# driver.close()
