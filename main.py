@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
+# from selenium.webdriver.common.action_chains import ActionChains
 espera_corta = 1
 espera_larga = 3
 timeout=10
@@ -17,6 +17,8 @@ driver = webdriver.Firefox()
 # chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 
 df = pd.read_csv('user.csv', '\t' )
+num_elementos = len(df.index)
+contador = 1
 
 for row, datos in df.iterrows():
     sitio = datos["sitio"]
@@ -95,12 +97,15 @@ for row, datos in df.iterrows():
     except:
         print(f"En {sitio} no hay actualizaciones de temas disponibles")
 
+    finally:
+        if contador != num_elementos:
+            driver.switch_to.new_window('sitio')
+        print("hasta aquí hemos llegado")
+        print(contador)
 
+    contador += 1
 
 time.sleep(espera_corta)
 
-ActionChains(driver)\
-    .key_down(Keys.CONTROL)\
-    .send_keys('w')\
-    .perform()
+
 # driver.close()

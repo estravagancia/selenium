@@ -1,2 +1,5 @@
 selenium
 pandas
+# webscraping.py
+requests
+lxml
