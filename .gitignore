@@ -3,6 +3,7 @@ comandos.txt
 geckodriver.log
 __main copy.py
 *copy.py
+* copy.py
 /driver/
 /driver/*.*
 webscraping.py
