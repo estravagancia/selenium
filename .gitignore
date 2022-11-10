@@ -5,3 +5,5 @@ __main copy.py
 *copy.py
 /driver/
 /driver/*.*
+webscraping.py
+lighthouse.py
