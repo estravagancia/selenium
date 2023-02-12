@@ -1,4 +1,4 @@
-user.csv
+*.csv
 comandos.txt
 geckodriver.log
 webscraping.py
