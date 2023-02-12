@@ -1,10 +1,10 @@
 user.csv
 comandos.txt
 geckodriver.log
-__main copy.py
-*copy.py
-* copy.py
-/driver/
-/driver/*.*
 webscraping.py
 lighthouse.py
+/driver/
+/driver/*.*
+__main copy.py
+*copy.py
+user copy.py
